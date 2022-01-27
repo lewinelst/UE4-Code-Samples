@@ -56,7 +56,7 @@ FHitResult ULineTrace::LineTraceSingle(FVector Start, FVector End, bool ShowDebu
 			false,
 			3.0f,
 			0,
-			5.0f
+			3.0f
 		);
 	}
 

@@ -209,3 +209,15 @@ void AGameCharacter::Attack()
 	}
 }
 
+bool AGameCharacter::GetHasWeapon()
+{
+	if (Weapon)
+	{
+		return true;
+	}
+	else 
+	{
+		return false;
+	}
+}
+

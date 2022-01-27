@@ -57,6 +57,9 @@ protected:
 
 	void Attack();
 
+	UFUNCTION(BlueprintCallable)
+		bool GetHasWeapon();
+
 
 
 
