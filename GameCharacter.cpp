@@ -1,5 +1,5 @@
-// GameCharacter 
-// Lewin
+// GameCharacter.cpp
+// Lewin Elston 2022.
 
 #include "GameCharacter.h"
 #include "Camera/CameraComponent.h"

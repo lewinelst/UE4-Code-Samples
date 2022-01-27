@@ -1,4 +1,5 @@
-// Lewin
+// GameCharacter.h
+// Lewin Elston 2022.
 
 #pragma once
 

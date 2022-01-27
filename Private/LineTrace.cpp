@@ -1,4 +1,5 @@
-// Fill out your copyright notice in the Description page of Project Settings.
+// LineTrace.cpp
+// Lewin Elston 2022.
 
 
 #include "LineTrace.h"
