@@ -205,7 +205,7 @@ void AGameCharacter::Attack()
 {
 	if (Weapon)
 	{
-		Weapon->Fire();
+		FHitResult HitResult = Weapon->Fire();
 	}
 }
 

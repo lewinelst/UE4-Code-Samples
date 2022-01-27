@@ -4,7 +4,23 @@
 
 #include "CoreMinimal.h"
 #include "GameFramework/Actor.h"
+#include "Engine/DataTable.h"
 #include "Weapon.generated.h"
+
+USTRUCT(BlueprintType)
+struct FWeaponData : public FTableRowBase
+{
+	GENERATED_BODY()
+
+	UPROPERTY(EditAnywhere)
+		class USkeletalMesh* WeaponMesh;
+
+	UPROPERTY(EditAnywhere)
+		FString WeaponName;
+
+	UPROPERTY(EditAnywhere)
+		class UAnimationAsset* FireAnimation;
+};
 
 UCLASS()
 class TERRAINTECH_API AWeapon : public AActor
@@ -16,18 +32,21 @@ public:
 	AWeapon();
 
 protected:
-	UPROPERTY(EditAnywhere)
-		class USkeletalMeshComponent* MeshComp;
+	class USkeletalMeshComponent* MeshComp;
+
+	class ULineTrace* LineTraceComp;
 
 	UPROPERTY(EditAnywhere)
-		class UAnimationAsset* FireAnimation;
+		class UDataTable* WeaponDataTable;
+
+	FWeaponData* WeaponData;
 
 protected:
 	// Called when the game starts or when spawned
 	virtual void BeginPlay() override;
 
 public:
-	void Fire();
+	FHitResult Fire();
 
 
 };
