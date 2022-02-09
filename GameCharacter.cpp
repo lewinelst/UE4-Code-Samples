@@ -36,7 +36,6 @@ AGameCharacter::AGameCharacter()
 	LookRate = 45;
 
 	Sprinting = false; 
-	Jumping = false;
 	
 	GetCharacterMovement()->NavAgentProps.bCanCrouch = true;
 	GetCharacterMovement()->MaxWalkSpeed = WalkSpeed;
@@ -71,10 +70,6 @@ void AGameCharacter::Tick(float DeltaTime)
 {
 	Super::Tick(DeltaTime);
 
-	if (Jumping)
-	{
-		Jump();
-	}
 
 }
 
@@ -96,8 +91,7 @@ void AGameCharacter::SetupPlayerInputComponent(UInputComponent* PlayerInputCompo
 	PlayerInputComponent->BindAction("Sprint", IE_Released, this, &AGameCharacter::ToggleSprint);
 
 	//Jumping
-	PlayerInputComponent->BindAction("Jump", IE_Pressed, this, &AGameCharacter::CheckJump);
-	PlayerInputComponent->BindAction("Jump", IE_Released, this, &AGameCharacter::CheckJump);
+	PlayerInputComponent->BindAction("Jump", IE_Pressed, this, &AGameCharacter::EnableJump);
 
 	//Crouching
 	PlayerInputComponent->BindAction("Crouch", IE_Pressed, this, &AGameCharacter::ToggleCrouch);
@@ -163,16 +157,9 @@ void AGameCharacter::LookUpAtRate(float Rate)
 	AddControllerPitchInput(Rate * GetWorld()->GetDeltaSeconds() * TurnRate);
 }
 
-void AGameCharacter::CheckJump()
+void AGameCharacter::EnableJump()
 {
-	if (Jumping)
-	{
-		Jumping = false;
-	}
-	else 
-	{
-		Jumping = true; 
-	}
+	Jump();
 }
 
 void AGameCharacter::ToggleCrouch()

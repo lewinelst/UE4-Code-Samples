@@ -41,7 +41,7 @@ FHitResult AWeapon::Fire()
 
 	FVector StartLocation = MeshComp->GetSocketLocation(FName("MuzzleSocket"));
 	FRotator Rotation = MeshComp->GetSocketRotation(FName("MuzzleSocket"));
-	FVector EndLocation = StartLocation + Rotation.Vector() * 1500.0f;
+	FVector EndLocation = StartLocation + Rotation.Vector() * 4000.0f;
 
 	return LineTraceComp->LineTraceSingle(StartLocation, EndLocation, true);
 }

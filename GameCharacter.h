@@ -34,9 +34,7 @@ protected:
 	void TurnAtRate(float Rate);
 	void LookUpAtRate(float Rate);
 
-	void CheckJump();
-	UPROPERTY()
-		bool Jumping;
+	void EnableJump();
 
 	void ToggleCrouch();
 
