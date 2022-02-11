@@ -3,6 +3,8 @@
 
 #include "AIBotController.h"
 #include "Perception/AIPerceptionComponent.h"
+#include "AIBotCharacter.h"
+#include "Waypoint.h"
 #include "Perception/AISenseConfig_Sight.h"
 
 AAIBotController::AAIBotController()
@@ -48,6 +50,12 @@ void AAIBotController::OnPossess(APawn* AIPawn)
 void AAIBotController::Tick(float DeltaSeconds)
 {
 	Super::Tick(DeltaSeconds);
+
+	AAIBotCharacter* BotCharacter = Cast<AAIBotCharacter>(GetPawn());
+	if (BotCharacter->NextWaypoint != nullptr)
+	{
+		MoveToActor(BotCharacter->NextWaypoint, 5.0f);
+	}
 }
 
 FRotator AAIBotController::GetControlRotation() const
