@@ -5,7 +5,7 @@
 #include "Camera/CameraComponent.h"
 #include "GameFramework/SpringArmComponent.h"
 #include "GameFramework/CharacterMovementComponent.h"
-#include "Public/Weapon.h"
+#include "Weapon.h"
 
 
 // Sets default values (Constructor) 

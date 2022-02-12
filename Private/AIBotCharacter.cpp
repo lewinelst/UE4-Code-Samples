@@ -17,6 +17,14 @@ AAIBotCharacter::AAIBotCharacter()
 	GetCharacterMovement()->bOrientRotationToMovement = true;
 	GetCharacterMovement()->RotationRate = FRotator(0.0f, 600.0f, 0.0f);
 
+	WalkSpeed = 200.f;
+	RunSpeed = 400.f;
+
+
+	GetCharacterMovement()->MaxWalkSpeed = 200.f;
+
+
+
 }
 
 // Called when the game starts or when spawned
@@ -24,6 +32,18 @@ void AAIBotCharacter::BeginPlay()
 {
 	Super::BeginPlay();
 	
+}
+
+void AAIBotCharacter::WalkRunChange(bool SetToRun) //Sets to run speed if true or sets to walk speed if false
+{
+	if (SetToRun == false)
+	{
+		GetCharacterMovement()->MaxWalkSpeed = WalkSpeed;
+	}
+	else
+	{
+		GetCharacterMovement()->MaxWalkSpeed = RunSpeed;
+	}
 }
 
 // Called every frame

@@ -5,6 +5,8 @@
 #include "Perception/AIPerceptionComponent.h"
 #include "AIBotCharacter.h"
 #include "Waypoint.h"
+#include "GameCharacter.h"
+#include "Runtime/Engine/Classes/Kismet/GameplayStatics.h"
 #include "Perception/AISenseConfig_Sight.h"
 
 AAIBotController::AAIBotController()
@@ -50,11 +52,22 @@ void AAIBotController::OnPossess(APawn* AIPawn)
 void AAIBotController::Tick(float DeltaSeconds)
 {
 	Super::Tick(DeltaSeconds);
-
 	AAIBotCharacter* BotCharacter = Cast<AAIBotCharacter>(GetPawn());
-	if (BotCharacter->NextWaypoint != nullptr)
+
+	if (DistanceToPlayer > AISightRadius)
+	{
+		BotCharacter->WalkRunChange(false);
+		bIsPlayerDetected = false;
+	}
+
+	if (BotCharacter->NextWaypoint != nullptr && bIsPlayerDetected == false) //Move to waypoint;
 	{
 		MoveToActor(BotCharacter->NextWaypoint, 5.0f);
+	}
+	else if (bIsPlayerDetected == true) //Move to player
+	{
+		AGameCharacter* Player = Cast<AGameCharacter>(UGameplayStatics::GetPlayerCharacter(GetWorld(), 0));
+		MoveToActor(Player, 5.0f); 
 	}
 }
 
@@ -70,7 +83,15 @@ FRotator AAIBotController::GetControlRotation() const
 
 void AAIBotController::OnPawnDetected(const TArray<AActor*>& DetectedPawns)
 {
+	AAIBotCharacter* BotCharacter = Cast<AAIBotCharacter>(GetPawn());
+	BotCharacter->WalkRunChange(true);
 
+	for (size_t i = 0; i < DetectedPawns.Num(); i++)
+	{
+		DistanceToPlayer = GetPawn()->GetDistanceTo(DetectedPawns[i]);
+	}
+
+	bIsPlayerDetected = true; 
 }
 
 

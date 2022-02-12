@@ -18,9 +18,15 @@ public:
 	UPROPERTY(EditAnywhere, BlueprintReadWrite)
 		class AWaypoint* NextWaypoint;
 
+	void WalkRunChange(bool SetToRun);
+
+
 protected:
 	// Called when the game starts or when spawned
 	virtual void BeginPlay() override;
+
+	float WalkSpeed;
+	float RunSpeed;
 
 public:	
 	// Called every frame
